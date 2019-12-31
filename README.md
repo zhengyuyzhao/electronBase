@@ -2,5 +2,7 @@
 
 node version >=8.12.0
 
-npm install
-npm run builder or npm run pack
+yarn autoclean -I
+yarn autoclean -G
+yarn install
+yarn run builder or yarn run pack
