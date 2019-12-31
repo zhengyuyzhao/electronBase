@@ -1,0 +1,41 @@
+{
+    "name": "test",
+    "version": "0.1.0",
+    "main": "./dist/main.js",
+    "scripts": {
+        "build": "rm -rf ./dist && rm -rf /home/zzy/Desktop/doc/test && tsc && webpack --config config/webpack.config.js  ",
+        "start": "npm run build  && electron .",
+        "builder": "npm run build && electron-builder --linux --x64",
+        "pack": "npm run build && electron-packager ./dist myClient --linux --out /home/zzy/Desktop/doc --overwrite --arch=x64 --app-version=0.0.1 --icon=electron.ico --electron-version=2.0.0"
+    },
+    "build": {
+        "productName": "xxxx",
+        "appId": "com.xxx.xxxxx",
+        "copyright": "xxxx",
+        "directories": {
+            "app": "dist",
+            "output": "/home/zzy/Desktop/doc/test"
+        },
+        "files": [
+            "**/*",
+            "build/icons/*"
+        ],
+        "asar": true,
+        "linux": {
+            "icon": "build/icons/icon.png"
+        }
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "@types/electron": "^1.6.10",
+        "copy-webpack-plugin": "^5.1.1",
+        "electron-builder": "^21.2.0",
+        "electron-dev": "^7.1.7",
+        "electron-packager": "^14.1.1",
+        "html-webpack-plugin": "^3.2.0",
+        "typescript": "^3.7.4",
+        "webpack": "^4.41.5",
+        "webpack-cli": "^3.3.10",
+        "webpack-merge": "^4.2.2"
+    }
+}
