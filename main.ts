@@ -1,7 +1,6 @@
 // var app = require("app"); // 控制应用生命周期的模块。
 // var BrowserWindow = require("browser-window"); // 创建原生浏览器窗口的模块
-import { app, BrowserWindow } from 'electron'
-import path from 'path'
+import { app, BrowserWindow, ipcMain, nativeImage } from 'electron'
 
 // const { app, BrowserWindow } = require('electron')
 // import path from 'path'
@@ -27,12 +26,10 @@ app.on("ready", function () {
     width: 800,
     height: 600,
     webPreferences: {
-      nodeIntegration: true // add this
+      nodeIntegration: true // html页面饮用 process 等 node lib时
     }
   });
-  console.log(__dirname)
-  console.log(__filename)
-  console.log(process.cwd())
+
   // 加载应用的 index.html
   mainWindow.loadFile(`public/index.html`);
 
@@ -46,4 +43,11 @@ app.on("ready", function () {
     // 但这次不是。
     mainWindow = null;
   });
+
+  ipcMain.on('ondragstart', (event, filePath) => {
+    event.sender.startDrag({
+      file: filePath,
+      icon: nativeImage.createFromPath('public/a.png')
+    })
+  })
 });
